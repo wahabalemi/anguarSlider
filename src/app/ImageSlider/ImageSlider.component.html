@@ -1,0 +1,36 @@
+<div *ngIf="slides.length>0;else empty_slides">
+  <div class="slider">
+
+    <div *ngIf="slides.length>1 && lang=='1'">
+
+      <div (click)="goToPrevious()" class="leftArrow">❱</div>
+      <div (click)="goToNext()" class="rightArrow">❰</div>
+    </div>
+    <div *ngIf="slides.length>1 && lang=='2'">
+
+      <div (click)="goToPrevious()" class="leftArrow">❰</div>
+      <div (click)="goToNext()" class="rightArrow">❱</div>
+    </div>
+
+    <video class="slide" *ngIf="getCurrentSlideType() == 'video';else imagebox" width="320" height="240" controls>
+      <source [src]="getCurrentSlideUrl()" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+
+    <ng-template #imagebox>
+      <a href="{{getCurrentSlideUrl()}}" target="_blank"> <img class="slide" src="{{getCurrentSlideUrl()}}"> </a>
+    </ng-template>
+
+    <ng-template *ngIf="slides.length>1">
+      <div class="dotsContainer">
+        <div *ngFor="let slide of slides; let slideIndex = index" class="dot" (click)="goToSlide(slideIndex)">
+        </div>
+      </div>
+    </ng-template>
+
+  </div>
+</div>
+
+<ng-template #empty_slides>
+
+</ng-template>
