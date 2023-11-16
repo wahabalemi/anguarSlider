@@ -18,7 +18,7 @@
     </video>
 
     <ng-template #imagebox>
-      <a href="{{getCurrentSlideUrl()}}" target="_blank"> <img class="slide" src="{{getCurrentSlideUrl()}}"> </a>
+      <a href="{{getCurrentSlideUrl()}}" target="_blank"> <img class="slide" src="{{getCurrentSlideUrl()}}" [@fadeInOut]> </a>
     </ng-template>
 
     <ng-template *ngIf="slides.length>1">

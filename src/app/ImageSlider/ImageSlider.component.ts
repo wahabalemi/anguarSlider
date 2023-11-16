@@ -1,9 +1,32 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SlideInterface } from '../ImageSlider/types/SlideInterface'
+import { trigger, transition, style, animate } from '@angular/animations';
+
 @Component({
   selector: 'image-slider',
   templateUrl: './ImageSlider.component.html',
-  styleUrls: ['./ImageSlider.component.css']
+  styleUrls: ['./ImageSlider.component.css'],
+  animations: [
+
+    trigger('fadeInOut', [
+
+      transition(':enter', [
+
+        style({ opacity: 0 }),
+
+        animate(2000, style({ opacity: 1 }))
+
+      ]),
+
+      transition(':leave', [
+
+        animate(2000, style({ opacity: 0 }))
+
+      ])
+
+    ])
+
+  ]
 })
 export class ImageSliderComponent {
   @Input() slides: SlideInterface[] = [];
@@ -21,7 +44,7 @@ export class ImageSliderComponent {
     if (this.timeoutId) {
       window.clearTimeout(this.timeoutId);
     }
-    this.timeoutId = window.setTimeout(() => this.goToNext(), 3000);
+    this.timeoutId = window.setTimeout(() => this.goToNext(), 5000);
   }
 
   goToPrevious(): void {
